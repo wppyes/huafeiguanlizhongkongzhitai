@@ -6,7 +6,7 @@
       </el-button>
     </div>
     <div class="filter-container">
-      <el-radio-group v-model="show" @change="handlechange">
+      <el-radio-group v-model="temp.Category" @change="handlechange">
         <el-radio-button v-for="item in Type" :label="item.Value" :key="item.Value">{{item.Text}}</el-radio-button>
       </el-radio-group>
     </div>
@@ -42,15 +42,6 @@
         <el-form-item label="名称" prop="Name">
           <el-input v-model="temp.Name" placeholder="请填写名字"/>
         </el-form-item>
-        <div class="filter-container">
-          <el-radio-group v-model="temp.Category">
-            <el-radio-button
-              v-for="item in Type"
-              :label="item.Value"
-              :key="item.Value"
-            >{{item.Text}}</el-radio-button>
-          </el-radio-group>
-        </div>
         <el-tabs v-model="nTypeid" type="card" @tab-click="handleClick">
           <el-tab-pane
             v-for="item in NType"
@@ -171,14 +162,13 @@ export default {
     },
     handlechange() {
       this.BigList = [];
-      this.BigList = bigarr.filter(v => v.Category == this.show);
+      this.BigList = bigarr.filter(v => v.Category == this.temp.Category);
     },
     handleClick() {
       this.getlist();
     },
     handleditor(row, title) {
       this.temp.Id = row.Id;
-      this.temp.Category = row.Category;
       this.temp.Name = row.Name;
       this.temp.ConfigJson = JSON.parse(row.ConfigJson);
       for (let i in arr) {
@@ -202,10 +192,18 @@ export default {
       }
       this.dialogStatus = title;
       this.dialogFormVisible = true;
-      this.getlist();
+      this.setdiv();
       this.$nextTick(() => {
         this.$refs["dataForm"].clearValidate();
       });
+    },
+    setdiv(){
+      if(this.temp.Category==0){
+        this.nTypeid='1'
+      }else{
+        this.nTypeid='4'
+      };
+      this.getlist();
     },
     handledel(row, type) {
       var str = type == 1 ? "启用" : "删除";
@@ -234,7 +232,6 @@ export default {
     },
     handleadd(title, creat) {
       this.temp.Id = 0;
-      this.temp.Category = 0;
       this.temp.Name = "";
       this.temp.ConfigJson = [];
       this.dialogStatus = title;
@@ -247,7 +244,7 @@ export default {
           arr[i].Config = "";
         }
       }
-      this.getlist();
+      this.setdiv();
       this.$nextTick(() => {
         this.$refs["dataForm"].clearValidate();
       });
