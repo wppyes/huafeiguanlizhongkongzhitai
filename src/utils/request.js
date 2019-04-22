@@ -3,10 +3,9 @@ import { MessageBox ,Message } from 'element-ui'
 import router from '../router/index'
 var count=0;
 axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded';
-
 const service = axios.create({
-  // baseURL: 'http://192.168.1.145:8005/',
-   baseURL: '/API/', // api 的 base_url
+   baseURL: 'http://192.168.1.145:8022/',
+   //baseURL: '/API/', // api 的 base_url
   timeout: 5000, // request timeout
 })
 service.interceptors.request.use(
@@ -25,7 +24,7 @@ service.interceptors.request.use(
 )
 service.interceptors.response.use(
   response => {
-    const res = response.data;    
+    const res = response.data; 
     if(res.Status ==0 ){
       Message({
         message: res.Msg,
@@ -40,7 +39,7 @@ service.interceptors.response.use(
           confirmButtonText: '确定',
           callback: action => {
               localStorage.clear();
-              router.push({ path: "/" });
+              router.push({ path: "/" ,query:{redirect:location.hostname}});
           }
         });   
         localStorage.clear();

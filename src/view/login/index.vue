@@ -121,12 +121,15 @@ export default {
                 };
                 localStorage.setItem("SiteKey", response.SiteKey + ",1");
                 var modelobj = JSON.stringify(tempdata);
-                localStorage.setItem("logintemp", modelobj);
-                
+                localStorage.setItem("logintemp", modelobj);                
                 this.loading = false;
-                this.$router.push({
-                  path: "/charge/chargeorder"
-                });
+                if(this.$route.query.redirect == location.hostname){
+                  this.$router.go(-1);
+                }else{
+                  this.$router.push({
+                    path: "/charge/chargeorder"
+                  });
+                }                
               }
             });
           });

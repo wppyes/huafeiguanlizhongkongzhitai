@@ -36,6 +36,11 @@
         label-width="100px"
         style="width: 400px; margin-left:50px;"
       >
+        <el-form-item label="通道" prop="list">
+          <el-checkbox-group v-model="temp.list">
+            <el-checkbox v-for="item in channelist" :label="JSON.stringify(item)" :key="item.ChannelType" name="type">{{item.ChannelName}}</el-checkbox>
+          </el-checkbox-group>
+        </el-form-item>
         <el-form-item label="名称" prop="ProductName">
           <el-input v-model="temp.ProductName" placeholder="请填写产品名字"/>
         </el-form-item>
@@ -72,8 +77,12 @@ export default {
         Id: 0,
         ProductType: "1",
         ProductName: "",
-        Parvalue:''
+        Parvalue:'',
+        list:[]
       },
+      channelist:[],
+      channelist1:[],
+      channelist2:[],
       dialogStatus: "", //面板标题
       dialogFormVisible: false, //面板是否展示
       rules: {
@@ -82,6 +91,9 @@ export default {
         ],
         Parvalue: [
           { required: true, trigger: ['change'], validator: validnum },{ type: 'number', message: '金额必须为数字值'}
+        ],
+        list: [
+          { required: true, trigger: "blur", message: '通道必须选择'}
         ]
       }
     };
@@ -105,7 +117,22 @@ export default {
     }).then(response => {      
         if(response.Status==1){
           this.NType=response.NType;
-        }
+          for(let i in response.HFModel){
+            let tem={
+              ChannelType:response.HFModel[i].ChannelType,
+              ChannelName:response.HFModel[i].ChannelName
+            };
+            this.channelist1.push(tem)
+          };
+          this.channelist=this.channelist1;
+          for(let j in response.SPModel){
+            let tem={
+              ChannelType:response.SPModel[j].ChannelType,
+              ChannelName:response.SPModel[j].ChannelName
+            };
+            this.channelist2.push(tem)
+          };
+        };        
     });
   },
   methods: {
@@ -114,14 +141,26 @@ export default {
           this.List=arr.filter(v => v.ProductType == this.temp.ProductType);
         },
         handleClick(){
-            this.getlist();
+          if(this.temp.ProductType<=3){
+            this.channelist=this.channelist1;
+          }else{
+            this.channelist=this.channelist2;
+          }
+          this.getlist();
         },
         handleditor(row, title) {
             this.temp = {
                 Id: row.Id,
                 ProductType: row.ProductType.toString(),
                 ProductName: row.ProductName,
-                Parvalue: row.Parvalue
+                Parvalue: row.Parvalue,
+                list:[]
+            };
+            if(row.Channel){
+              this.temp.list=JSON.parse(row.Channel);
+              for(let k in this.temp.list){
+                this.temp.list[k]=JSON.stringify(this.temp.list[k])
+              }
             };
             this.dialogStatus = title;
             this.dialogFormVisible = true;
@@ -155,10 +194,11 @@ export default {
             })
             .catch(() => {});
     },
-    handleadd(title, creat) {
+    handleadd(title, creat) {      
         this.temp.Id=0;
         this.temp.ProductName='';
         this.temp.Parvalue='';
+        this.temp.list=[];
         this.dialogStatus = title;
         this.dialogFormVisible = true;
         this.$nextTick(() => {
@@ -166,6 +206,9 @@ export default {
         });
     },
     createData() {
+      for(let k in this.temp.list){
+        this.temp.list[k]=JSON.parse(this.temp.list[k])
+      };
       this.$refs["dataForm"].validate(valid => {
         if (valid) {
           var data = this.$qs.stringify(this.temp);
@@ -182,7 +225,8 @@ export default {
                         Id: response.Id,
                         ProductType: parseInt(this.temp.ProductType),
                         ProductName: this.temp.ProductName,
-                        Parvalue:parseFloat(this.temp.Parvalue)
+                        Parvalue:parseFloat(this.temp.Parvalue),
+                        Channel:JSON.stringify(this.temp.list)
                       };
                     arr.unshift(param);
                 }else{
@@ -191,6 +235,7 @@ export default {
                       arr[i].ProductType =parseInt(this.temp.ProductType);
                       arr[i].ProductName=this.temp.ProductName;
                       arr[i].Parvalue=parseFloat(this.temp.Parvalue);
+                      arr[i].Channel=JSON.stringify(this.temp.list);
                       break;
                     }
                   }

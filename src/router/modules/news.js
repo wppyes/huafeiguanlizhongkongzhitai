@@ -41,9 +41,16 @@ const newsRouter = {
       path: 'npackageproduct',
       component: () => import('@/view/news/npackageproduct'),
       meta: {
-        title: '套餐产品管理'
+        title: '套餐产品设置'
       }
-    }
+    },
+    {
+      path: 'setprodut',
+      component: () => import('@/view/news/setprodut'),
+      meta: {
+        title: '产品配置'
+      }
+    },
   ]
 }
 export default newsRouter

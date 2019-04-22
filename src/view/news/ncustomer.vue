@@ -1,16 +1,19 @@
 <template>
   <div class="ncustomer1 boxright">
-    <el-button type="primary" class="add" @click="handleadd('增加客户',true)" style="margin-right:20px;">
-      <i class="el-icon-circle-plus"></i> 增加客户
-    </el-button>
-    <el-input
-        placeholder="请输入关键字"
-        v-model="listQuery.name"
-        style="width: 150px;"
-        class="filter-item"
-        clearable
-      />
-    <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">搜索</el-button>
+    
+    <div class="filter-container">
+      <el-button type="primary" class="add" @click="handleadd('增加客户',true)" style="margin-right:20px;">
+        <i class="el-icon-circle-plus"></i> 增加客户
+      </el-button>
+      <el-input
+          placeholder="请输入关键字"
+          v-model="listQuery.name"
+          style="width: 150px;"
+          class="filter-item"
+          clearable
+        />
+      <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">搜索</el-button>
+    </div>
     <el-table v-loading="listLoading" :data="list" border fit highlight-current-row>
       <el-table-column label="公司名称" prop="ComPany" align="center" width="150px"></el-table-column>
       <el-table-column label="类型" prop="TypeStr" align="center" width="80px"></el-table-column>
@@ -501,7 +504,6 @@ export default {
     },
     changelist(){
         this.tablist=this.templist.filter(v => v.ProductType == this.amounttype);
-        console.log(this.templist)
     },
     showtongdao(row,title) {
       this.dialogStatus = row.ComPany+'-'+title;

@@ -4,7 +4,7 @@
             <el-date-picker
                 v-model="value7"
                 type="daterange"
-                align="right"
+                align="left"
                 unlink-panels
                 range-separator="至"
                 start-placeholder="开始日期"

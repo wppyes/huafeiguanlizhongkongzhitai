@@ -164,7 +164,7 @@ export default {
             param:{}
           }).then(response => {
             if (response.Status == 1) {
-              this.$router.push({ path: "/" });
+              this.$router.push({ path: "/" ,query:{redirect:location.hostname} });
               localStorage.clear();
               this.$message({
                 message: '退出成功',

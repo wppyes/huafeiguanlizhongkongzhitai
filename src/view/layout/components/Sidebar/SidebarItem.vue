@@ -53,7 +53,6 @@ export default {
       var keys=localStorage.getItem('SiteKey');
       var ley=localStorage.getItem('SiteKey').split(',');
       localStorage.setItem('SiteKey',ley[0]+','+item.Id);
-      console.log(item.Url)
       this.$router.push({path:item.Url});
     },
   }
