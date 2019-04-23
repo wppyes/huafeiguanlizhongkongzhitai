@@ -30,7 +30,7 @@ export default {
   },
   created(){
     request({
-      url: 'Manager/Menus/GetMenusAllList',
+      url: 'Menus/GetMenusAllList',
       method: 'get',
       params: {}
     }).then(response => {

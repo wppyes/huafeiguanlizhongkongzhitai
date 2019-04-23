@@ -115,7 +115,7 @@ export default {
   },
   created() {
     request({
-      url: "Menus/GetMenusList",
+      url: "CustomerMenus/GetMenusList",
       method: "get",
       params: {}
     }).then(response => {
@@ -151,7 +151,7 @@ export default {
           cancelButtonText: '取消',
         }).then(() => {
            request({
-            url: "Menus/DelMenus",
+            url: "CustomerMenus/DelMenus",
             method: "post",
             data
           }).then(response => {
@@ -216,7 +216,7 @@ export default {
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {              
           request({
-            url: "Menus/SaveMenus",
+            url: "CustomerMenus/SaveMenus",
             method: "post",
             data
           }).then(response => {
@@ -281,7 +281,7 @@ export default {
         var id1 = item.Id, id2 = arr1[index + type].Id;//当前id为 id1,替换id为id2
         var data=this.$qs.stringify({id1: id1, id2: id2,});
         request({
-          url: "Menus/Sort",
+          url: "CustomerMenus/Sort",
           method: "post",
           data
         }).then(response => {

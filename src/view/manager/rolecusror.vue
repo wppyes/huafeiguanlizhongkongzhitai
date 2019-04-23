@@ -71,7 +71,7 @@ export default {
   },
   created() {
     request({
-      url: "role/GetRoleList",
+      url: "CustomerRole/GetRoleList",
       method: "get",
       params: {}
     }).then(response => {
@@ -81,7 +81,7 @@ export default {
       }
     });
     request({
-      url: "Menus/GetMenusList",
+      url: "CustomerMenus/GetMenusList",
       method: "get",
       params: {}
     }).then(response => {
@@ -103,7 +103,7 @@ export default {
         this.$refs["dataForm"].clearValidate();
       });
       request({
-        url: "Role/GetRoleById",
+        url: "CustomerRole/GetRoleById",
         method: "get",
         params: { Id: row.Id }
       }).then(response => {        
@@ -128,7 +128,7 @@ export default {
       })
         .then(() => {
           request({
-            url: "role/delrole",
+            url: "Customerrole/delrole",
             method: "post",
             data
           }).then(response => {
@@ -175,7 +175,7 @@ export default {
           };
           var data = this.$qs.stringify(param);
           request({
-            url: "Role/CreatRole",
+            url: "CustomerRole/CreatRole",
             method: "post",
             data
           }).then(response => {

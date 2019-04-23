@@ -9,8 +9,8 @@
       ></el-tab-pane>
     </el-tabs>
     <div class="filter-container">
-      <el-button type="primary" class="add" @click="handleadd('增加套餐产品',true)">
-        <i class="el-icon-circle-plus"></i> 增加套餐产品
+      <el-button type="primary" class="add" @click="handleadd('增加产品',true)">
+        <i class="el-icon-circle-plus"></i> 增加产品
       </el-button>
     </div>
     <el-table v-loading="listLoading" :data="List" border fit highlight-current-row>
@@ -18,7 +18,7 @@
       <el-table-column label="面值" prop="Parvalue" align="center"></el-table-column>
       <el-table-column label="操作" align="center">
         <template slot-scope="scope">
-          <el-button size="mini" type="primary" @click="handleditor(scope.row,'修改套餐')">
+          <el-button size="mini" type="primary" @click="handleditor(scope.row,'修改产品')">
             <i class="el-icon-edit"></i> 编辑
           </el-button>
           <el-button size="mini" type="danger" @click="handledel(scope.row)">

@@ -14,7 +14,7 @@
           </el-select>
         </el-form-item>
         <el-form-item label="通道" prop="setting">
-          <el-select v-model="temp.setting" placeholder="请选择角色">
+          <el-select v-model="temp.setting" placeholder="请选择通道">
             <el-option v-for="item in channelist" :label="item.ChannelName" :key="item.ChannelType" :value="item.ChannelType"></el-option>
           </el-select>
         </el-form-item>        

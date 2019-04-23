@@ -19,9 +19,9 @@
           <el-dropdown-item>
             <span style="display:block;" @click="dialogFormVisible = true">修改密码</span>
           </el-dropdown-item>
-          <el-dropdown-item>
+          <!-- <el-dropdown-item>
             <span style="display:block;" @click="dialogFormimg = true; filepath=''">修改头像</span>
-          </el-dropdown-item>
+          </el-dropdown-item> -->
           <el-dropdown-item divided>
             <span style="display:block;" @click="logout">退出登录</span>
           </el-dropdown-item>
@@ -195,7 +195,7 @@ export default {
     getupimg: function() {
       var data = this.$qs.stringify({ img: this.filepath });
       request({
-        url: "Manager/Users/ModifyImg",
+        url: "Users/ModifyImg",
         method: "post",
         data
       }).then(response => {
@@ -225,7 +225,7 @@ export default {
                 Pwd: this.form.newpassword
               });
               request({
-                url: "Manager/Users/ModifyPwd",
+                url: "Users/ModifyPwd",
                 method: "post",
                 data
               }).then(response => {

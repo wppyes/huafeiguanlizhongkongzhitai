@@ -17,10 +17,24 @@ const managerRouter = {
       }
     },
     {
+      path: 'menuscusror',
+      component: () => import('@/view/manager/menuscusror'),
+      meta: {
+        title: '客户菜单管理'
+      }
+    },
+    {
       path: 'role',
       component: () => import('@/view/manager/role'),
       meta: {
         title: '角色管理'
+      }
+    },
+    {
+      path: 'rolecusror',
+      component: () => import('@/view/manager/rolecusror'),
+      meta: {
+        title: '客户角色管理'
       }
     },
     {

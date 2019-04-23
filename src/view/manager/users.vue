@@ -89,7 +89,7 @@ export default {
   },
   created() {
     request({
-      url: "Manager/Users/UserList",
+      url: "Users/UserList",
       method: "get",
       params: {}
     }).then(response => { 
@@ -126,7 +126,7 @@ export default {
           row.Status == 0?statu = 1:statu = 0;
           var data = this.$qs.stringify({ Id: row.Id,Status: statu});
           request({
-            url: "Manager/Users/ChangeStatus",
+            url: "Users/ChangeStatus",
             method: "post",
             data
           }).then(response => {
@@ -150,7 +150,7 @@ export default {
       })
         .then(() => {
           request({
-            url: "Manager/Users/ResetPwd",
+            url: "Users/ResetPwd",
             method: "post",
             data
           }).then(response => {
@@ -173,7 +173,7 @@ export default {
       })
         .then(() => {
           request({
-            url: "Manager/Users/DelUser",
+            url: "Users/DelUser",
             method: "post",
             data
           }).then(response => {
@@ -208,7 +208,7 @@ export default {
         if (valid) {
           var data = this.$qs.stringify(this.temp);
           request({
-            url: "Manager/Users/CreatUser",
+            url: "Users/CreatUser",
             method: "post",
             data
           }).then(response => {
@@ -233,7 +233,7 @@ export default {
         if (valid) {
           var data = this.$qs.stringify(this.temp);
           request({
-            url: "Manager/Users/Modify",
+            url: "Users/Modify",
             method: "post",
             data
           }).then(response => {

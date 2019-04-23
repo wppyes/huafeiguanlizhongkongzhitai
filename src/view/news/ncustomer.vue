@@ -85,6 +85,11 @@
             <el-radio label="2">女</el-radio>
           </el-radio-group>
         </el-form-item>
+        <el-form-item label="角色" prop="Role">
+          <el-select v-model="temp.Role" placeholder="请选择角色">
+            <el-option v-for="item in rolelist" :label="item.Name" :key="item.Id" :value="item.Id"></el-option>
+          </el-select>
+        </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取消</el-button>
@@ -208,6 +213,7 @@ export default {
       NType:[],//充值视频还是话费类型
       CustomerType:[],//充值接口类型
       channel:[],//通道列表
+      rolelist:[],//角色列表
       temp: {
         Id: 0,
         Type: "",
@@ -215,7 +221,8 @@ export default {
         UserName: "",
         Phone: '',
         Sex: '',
-        LoginName: ''
+        LoginName: '',
+        Role:3
       },
       tempadd:{
         cid:0,
@@ -246,7 +253,10 @@ export default {
         LoginName: [
           { required: true, message: "登录名必须填写！", trigger: "blur" }
         ],
-        Sex: [{ required: true, message: "角色必须选择！", trigger: "change" }]
+        Sex: [{ required: true, message: "角色必须选择！", trigger: "change" }],        
+        Role: [
+          { required: true, message: "角色必须选择！", trigger: "change" }
+        ],
       },
       rulesadd:{
         amount: [
@@ -266,6 +276,16 @@ export default {
           this.CustomerType = response.CustomerType;
          }
       });
+      
+      request({
+        url: "CustomerRole/GetRoleList",
+        method: "get",
+        params: {}
+      }).then(response => {
+        if(response.Status==1){ 
+        this.rolelist = response.List;
+        }
+    });
       this.getList();
   },
   methods: {
@@ -356,7 +376,8 @@ export default {
         UserName: row.UserName,
         Phone:  row.Phone,
         Sex:  row.Sex.toString(),
-        LoginName:  row.LoginName
+        LoginName:  row.LoginName,
+        Role:row.Role || 3
       };
       this.dialogStatus = row.ComPany+'-'+title;
       this.dialogFormVisible = true;
@@ -373,7 +394,8 @@ export default {
         UserName: "",
         Phone: '',
         Sex:'1',
-        LoginName: ''
+        LoginName: '',
+        Role:3
       }
       this.dialogStatus = title;
       this.dialogFormVisible = true;
@@ -400,7 +422,7 @@ export default {
                   }
               }
               if(this.temp.Id==0){
-                this.temp.Id = 12;
+                this.temp.Id = data.Id;
                 this.temp.TypeStr=str;
                 this.temp.CId= 0;
                 this.temp.IsZH= 0;
@@ -415,10 +437,12 @@ export default {
                         this.list[i].TypeStr = str;
                         this.list[i].ComPany = this.temp.ComPany;
                         this.list[i].UserName = this.temp.UserName;
+                        this.list[i].LoginName = this.temp.LoginName;
                         this.list[i].Phone = this.temp.Phone;
                         this.list[i].Sex = this.temp.Sex;
                         this.list[i].HFAccount = 0;
                         this.list[i].TXAccount = 0;
+                        this.list[i].Role = this.temp.Role;
                     };
                 };
               }
