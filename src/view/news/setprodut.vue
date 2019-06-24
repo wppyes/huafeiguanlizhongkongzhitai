@@ -170,7 +170,9 @@ export default {
     handleditor(row, title) {
       this.temp.Id = row.Id;
       this.temp.Name = row.Name;
-      this.temp.ConfigJson = JSON.parse(row.ConfigJson);
+      if(row.ConfigJson){
+        this.temp.ConfigJson = JSON.parse(row.ConfigJson);
+      }      
       for (let i in arr) {
         if (arr[i].Channel) {
           let j = JSON.parse(arr[i].Channel);
@@ -250,6 +252,7 @@ export default {
       });
     },
     createData() {
+      this.temp.ConfigJson=[];
       for (let i in arr) {
         if (this.temp.Category == 0 && arr[i].ProductType <= 3) {
           let j = JSON.parse(arr[i].Config);

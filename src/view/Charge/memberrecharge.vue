@@ -13,8 +13,8 @@
             <el-option v-for="item in userlist" :label="item.UserName+'--'+item.ComPany" :key="item.Id" :value="item.Id"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="通道" prop="setting">
-          <el-select v-model="temp.setting" placeholder="请选择通道">
+        <el-form-item label="通道">
+          <el-select v-model="temp.setting" placeholder="请选择通道" clearable>
             <el-option v-for="item in channelist" :label="item.ChannelName" :key="item.ChannelType" :value="item.ChannelType"></el-option>
           </el-select>
         </el-form-item>        
@@ -93,7 +93,6 @@ export default {
         cid: [
           { required: true, message: "用户必须填写！", trigger: "change" }
         ],
-        setting: [{ required: true, message: "通道必须选择！", trigger: "change" }],
         account:[{ required: true, trigger: ['change'],  message: "请输入账号！" }],
         buynum:[{ required: true, trigger: ['change'], validator: validnum },{ type: 'number', message: '购买数量必须为数字值'}]
       },

@@ -38,77 +38,6 @@
         </div>
       </el-col>
     </el-row>
-    <h2 class="title">订单
-      <i class="el-icon-refresh" v-on:click="getOrder()"></i>
-    </h2>
-    <el-row>
-      <el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
-        <table class="table layui-table">
-            <thead class="el-table el-table--fit el-table--border el-table--enable-row-hover el-table--enable-row-transition">
-                <tr>
-                    <th>今日</th>
-                    <th>上方订单/条</th>
-                    <th>平台订单/条</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-cloak>
-                    <td>武汉福禄</td>
-                    <td>{{list1?list1.JFLWH:0}}</td>
-                    <td>{{list1?list1.JXTFLWH:0}}</td>
-                </tr>
-                <tr>
-                    <td>西藏福禄</td>
-                    <td>{{list1?list1.JFLXZ:0}}</td>
-                    <td>{{list1?list1.JXTFLXZ:0}}</td>
-                </tr>
-                <tr>
-                    <td>云极</td>
-                    <td>{{list1?list1.JYJ:0}}</td>
-                    <td>{{list1?list1.JXTJY:0}}</td>
-                </tr>
-                <tr>
-                    <td>总订单</td>
-                    <td>{{list1?list1.JFLWH+list1.JFLXZ+list1.JYJ:0}}</td>
-                    <td>{{list1?list1.JXTZ:0}}</td>
-                </tr>
-            </tbody>
-        </table>
-      </el-col>
-      <el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12">        
-        <table class="table layui-table">
-            <thead>
-                <tr>
-                    <th>今日</th>
-                    <th>上方订单/条</th>
-                    <th>平台订单/条</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-cloak>
-                    <td>武汉福禄</td>
-                    <td>{{list1?list1.JFLWH:0}}</td>
-                    <td>{{list1?list1.JXTFLWH:0}}</td>
-                </tr>
-                <tr>
-                    <td>西藏福禄</td>
-                    <td>{{list1?list1.JFLXZ:0}}</td>
-                    <td>{{list1?list1.JXTFLXZ:0}}</td>
-                </tr>
-                <tr>
-                    <td>云极</td>
-                    <td>{{list1?list1.JYJ:0}}</td>
-                    <td>{{list1?list1.JXTJY:0}}</td>
-                </tr>
-                <tr>
-                    <td>总订单</td>
-                    <td>{{list1?list1.JFLWH+list1.JFLXZ+list1.JYJ:0}}</td>
-                    <td>{{list1?list1.JXTZ:0}}</td>
-                </tr>
-            </tbody>
-        </table>
-      </el-col>
-    </el-row>
     
   </div>
 </template>
@@ -122,7 +51,6 @@ export default {
     return {
       list:null,
       loading:true,
-      list1:null,      
       FlWHBalance: 0,
       FlXZBalance: 0,
       YJBalance: 0,
@@ -179,18 +107,6 @@ export default {
           }
         })
     },
-
-    getOrder(){
-      request({
-        url: 'Console/GetTJ',
-        method: 'get',
-        params: {}
-      }).then(response => {
-         if(response.Status==1){
-          this.list1 = response.Model;
-         }
-      })
-    }
   }
 };
 </script>

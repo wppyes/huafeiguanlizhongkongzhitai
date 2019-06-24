@@ -86,8 +86,8 @@
       <el-table-column label="账号" prop="Account" width="130px" align="center"></el-table-column>
       <el-table-column label="类型" prop="ProductIdStr" width="100px" align="center"></el-table-column>
       <el-table-column label="面值" prop="Amount" width="80px" align="center"></el-table-column>
-      <el-table-column label="客户实扣" width="150px" prop="ActualPrice" align="center"></el-table-column>
-      <el-table-column label="上方实扣" width="150px" prop="PurchasePrice" align="center" v-if="showlist" :render-header="renderHeader"></el-table-column>
+      <el-table-column label="客户" width="70px" prop="ActualPrice" align="center"></el-table-column>
+      <el-table-column label="上方" width="120px" prop="PurchasePrice" align="center" v-if="showlist" :render-header="renderHeader"></el-table-column>
       <el-table-column label="提交时间" sortable="custom" prop="CreateTimeStr" width="140px" align="center"></el-table-column>
       <el-table-column label="充值时间" sortable="custom" prop="RechargeTimeStr" width="140px" align="center"></el-table-column>
       <el-table-column label="状态" width="110px" align="center">

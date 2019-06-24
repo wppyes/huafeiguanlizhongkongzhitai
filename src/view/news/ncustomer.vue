@@ -129,7 +129,7 @@
         style="width: 400px; margin-left:50px;"
       >       
         <el-form-item label="充值金额" prop="amount">
-          <el-input v-model.number="tempadd.amount" placeholder="请填写充值金额"/>
+          <el-input v-model="tempadd.amount" placeholder="请填写充值金额"/>
         </el-form-item>
         <el-form-item label="描述" prop="remark">
           <el-input v-model="tempadd.remark" type="textarea" placeholder="请填写描述"/>
@@ -191,10 +191,12 @@ var validPhone=(rule, value,callback)=>{
     }
 }
 var validnum=(rule, value,callback)=>{
-      if (value<=0){
-          callback(new Error('请输入正确的金额'))
-      }else {
-          callback()
+      var r = /^[0-9]*[1-9][0-9]*$/
+      var r1=/^(-?\d+)(\.\d+)?$/
+      if(r.test(value) || r1.test(value)&&value>0){
+        callback()
+      }else{
+        callback(new Error('请输入正确的金额'))
       }
   }
 export default {
@@ -260,7 +262,7 @@ export default {
       },
       rulesadd:{
         amount: [
-          { required: true, trigger: ['change'], validator: validnum },{ type: 'number', message: '金额必须为数字值'}
+          { required: true, trigger: ['change'], validator: validnum }
         ],
       }
     };
